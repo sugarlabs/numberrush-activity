@@ -1,0 +1,9 @@
+[Activity]
+name = NumberRush
+bundle_id = org.sugarlabs.NumRush
+icon = activity-generic1
+exec = sugar-activity TestActivity.TestActivity
+show_launcher = yes 
+activity_version = 1
+license = GPLv2+
+summary = play game
