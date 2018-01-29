@@ -10,5 +10,5 @@ The player is awarded 1 point for every correct answer and the game ends the mom
 
 The speed of the balls dropping increases as the game continues to make the higher points more and more challenging.
 Screen Shots: 
-![Image of ss1]( https://github.com/Gr33nMayhem/NumberRush/ScreenShots/Screenshot/2018-01-28 22-45-11.png )
-![Image of ss2]( https://github.com/Gr33nMayhem/NumberRush/ScreenShots/Screenshot/2018-01-28 22-45-27.png )
+![Image of ss1]( https://github.com/Gr33nMayhem/NumberRush/ScreenShots/Screenshot from 2018-01-28 22-45-11.png )
+![Image of ss2]( https://github.com/Gr33nMayhem/NumberRush/ScreenShots/Screenshot from 2018-01-28 22-45-27.png )
