@@ -1,3 +1,25 @@
+# Copyright (C) 2016 Azhar Ali here
+#
+# This program is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General
+# Public License as published by the Free Software
+# Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will
+# be useful, but WITHOUT ANY WARRANTY; without even
+# the implied warranty of MERCHANTABILITY or FITNESS FOR
+# A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General
+# Public License along with this program; if not, write
+# to the Free Software Foundation, Inc., 51 Franklin
+# St, Fifth Floor, Boston, MA 02110-1301  USA
+
+from gettext import gettext as _
+from sugar3.graphics.xocolor import XoColor
+from sugar3 import profile
 import pygame, sys
 from pygame.locals import *
 from random import randint
@@ -27,43 +49,43 @@ def randomOperation(maxi):
 
 def displayQuery(pick,x,y):
 	if (pick == 1):
-		strin ="Q: "+ str(x)+" + "+str(y)+" ="
+		strin =("Q: %d + %d =") % (x,y)
 		texSurfaceObj = fontObj.render (strin , True, WHITE )
 		texRectObj = texSurfaceObj.get_rect()
 		texRectObj.center = (ResX/2,20)
 		DISPLAYSURF.blit(texSurfaceObj, texRectObj)
 	elif (pick == 2):
-		strin = "Q: "+str(x)+" * "+str(y)+" ="
+		strin =("Q: %d * %d =") % (x,y)
 		texSurfaceObj = fontObj.render (strin , True, WHITE )
 		texRectObj = texSurfaceObj.get_rect()
 		texRectObj.center = (ResX/2,20)
 		DISPLAYSURF.blit(texSurfaceObj, texRectObj)
 	elif (pick == 3):
-		strin ="Q: "+ str(x)+" / "+str(y)+" ="
+		strin =("Q: %d / %d =") % (x,y)
 		texSurfaceObj = fontObj.render (strin , True, WHITE )
 		texRectObj = texSurfaceObj.get_rect()
 		texRectObj.center = (ResX/2,20)
 		DISPLAYSURF.blit(texSurfaceObj, texRectObj)
 	elif (pick == 4):
-		strin ="Q: "+ str(x)+" - "+str(y)+" ="
+		strin =("Q: %d - %d =") % (x,y)
 		texSurfaceObj = fontObj.render (strin , True, WHITE )
 		texRectObj = texSurfaceObj.get_rect()
 		texRectObj.center = (ResX/2,20)
 		DISPLAYSURF.blit(texSurfaceObj, texRectObj)
 	elif (pick == 5):
-		strin ="Q: "+ str(y)+" - "+str(x)+" ="
+		strin =("Q: %d - %d =") % (y,x)
 		texSurfaceObj = fontObj.render (strin , True, WHITE )
 		texRectObj = texSurfaceObj.get_rect()
 		texRectObj.center = (ResX/2,20)
 		DISPLAYSURF.blit(texSurfaceObj, texRectObj)
 
 def scoreBoard(score,hscore):
-	texSurfaceObj = fontObj.render ("Score = "+str(score) , True, WHITE )
+	texSurfaceObj = fontObj.render (("Score = %d") % (score) , True, WHITE )
 	texRectObj = texSurfaceObj.get_rect()
 	texRectObj.center = (80,20)
 	DISPLAYSURF.blit(texSurfaceObj, texRectObj)
 
-	texSurfaceObj = fontObj.render ("High Score = "+str(hscore) , True, WHITE )
+	texSurfaceObj = fontObj.render (("High Score = %d") % (hscore) , True, WHITE )
 	texRectObj = texSurfaceObj.get_rect()
 	texRectObj.center = (ResX-120,20)
 	DISPLAYSURF.blit(texSurfaceObj, texRectObj)
@@ -71,21 +93,21 @@ def scoreBoard(score,hscore):
 def newGameAnimation():
 
 	DISPLAYSURF.fill(GREY)
-	texSurfaceObj = megaFont.render ("1" , True, BLACK )
+	texSurfaceObj = megaFont.render (("3") , True, BLACK )
 	texRectObj = texSurfaceObj.get_rect()
 	texRectObj.center = (ResX/2,ResY/2)
 	DISPLAYSURF.blit(texSurfaceObj, texRectObj)
 	pygame.display.update()
 	pygame.time.wait(1000)
 	DISPLAYSURF.fill(GREY)
-	texSurfaceObj = megaFont.render ("2" , True, BLACK )
+	texSurfaceObj = megaFont.render (("2") , True, BLACK )
 	texRectObj = texSurfaceObj.get_rect()
 	texRectObj.center = (ResX/2,ResY/2)
 	DISPLAYSURF.blit(texSurfaceObj, texRectObj)
 	pygame.display.update()
 	pygame.time.wait(1000)
 	DISPLAYSURF.fill(GREY)
-	texSurfaceObj = megaFont.render ("3" , True, BLACK )
+	texSurfaceObj = megaFont.render (("1") , True, BLACK )
 	texRectObj = texSurfaceObj.get_rect()
 	texRectObj.center = (ResX/2,ResY/2)
 	DISPLAYSURF.blit(texSurfaceObj, texRectObj)
@@ -104,20 +126,20 @@ def ggAnimation (score,hscore):
 	while True:
 		flicker +=1
 		DISPLAYSURF.fill(GREY)
-		texSurfaceObj = megaFont.render ("GAME OVER!" , True, RED )
+		texSurfaceObj = megaFont.render (_("GAME OVER!") , True, RED )
 		texRectObj = texSurfaceObj.get_rect()
 		texRectObj.center = (ResX/2,ResY/2)
 		DISPLAYSURF.blit(texSurfaceObj, texRectObj)
-		texSurfaceObj = megaFont.render ("You Scored = "+str(score) , True, BLACK )
+		texSurfaceObj = megaFont.render (_("You Scored = %d") % (score) , True, BLACK )
 		texRectObj = texSurfaceObj.get_rect()
 		texRectObj.center = (ResX/2,ResY/2+90)
 		DISPLAYSURF.blit(texSurfaceObj, texRectObj)
-		texSurfaceObj = fontObj.render ("High Score = "+str(hscore) , True, BLACK )
+		texSurfaceObj = fontObj.render (_("High Score = %d") % (hscore) , True, BLACK )
 		texRectObj = texSurfaceObj.get_rect()
 		texRectObj.center = (ResX/2,ResY/2+180)
 		DISPLAYSURF.blit(texSurfaceObj, texRectObj)
 		if(flicker <15):
-			texSurfaceObj = fontObj.render ("Press any key to continue" , True, BLACK )
+			texSurfaceObj = fontObj.render (_("Press any key to continue") , True, BLACK )
 			texRectObj = texSurfaceObj.get_rect()
 			texRectObj.center = (ResX/2,20)
 			DISPLAYSURF.blit(texSurfaceObj, texRectObj)
@@ -137,17 +159,17 @@ def startAnimation():
 	flicker =0
 	while True:
 		flicker +=1
-		DISPLAYSURF.fill(GREY)
-		texSurfaceObj = megaFont.render ("Number Rush!" , True, BLACK )
+		DISPLAYSURF.fill(WHITE)
+		texSurfaceObj = megaFont.render (_("Number Rush!") , True, BLACK )
 		texRectObj = texSurfaceObj.get_rect()
 		texRectObj.center = (ResX/2,ResY/2)
 		DISPLAYSURF.blit(texSurfaceObj, texRectObj)
-		texSurfaceObj = fontObj.render ("Use arrow left-right OR A and D keys to move box" , True, BLACK )
+		texSurfaceObj = fontObj.render (_("Use arrow left-right OR A and D keys to move box") , True, BLACK )
 		texRectObj = texSurfaceObj.get_rect()
 		texRectObj.center = (ResX/2,ResY/2+180)
 		DISPLAYSURF.blit(texSurfaceObj, texRectObj)
 		if(flicker <15):
-			texSurfaceObj = fontObj.render ("Press any key to continue" , True, BLACK )
+			texSurfaceObj = fontObj.render (_("Press any key to continue") , True, BLACK )
 			texRectObj = texSurfaceObj.get_rect()
 			texRectObj.center = (ResX/2,20)
 			DISPLAYSURF.blit(texSurfaceObj, texRectObj)
@@ -173,7 +195,6 @@ def main():
 	game.run()
 
 
-
 class numrush():
 
 	def __init__(self):
@@ -183,7 +204,6 @@ class numrush():
 		global DISPLAYSURF,WHITE,BLACK,BLUE,GREEN,PURPLE,RED,GREY,fontObj,megaFont,ResX,ResY,FPS,fpsClock
 		score = 0
 		hscore = 0
-
 		infoObject = pygame.display.Info()
 
 		FPS = 30 
@@ -191,7 +211,7 @@ class numrush():
 		ResX = infoObject.current_w
 		ResY = infoObject.current_h
 		DISPLAYSURF = pygame.display.set_mode((ResX, ResY), 0, 32)
-		pygame.display.set_caption('Kitty')
+		pygame.display.set_caption(('Number Rush'))
 
 		WHITE = (255,255,255)
 		BLACK = (0,0,0)
