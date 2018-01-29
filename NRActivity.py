@@ -31,7 +31,7 @@ from sugar3.graphics.toolbutton import ToolButton
 from sugar3.activity.widgets import StopButton
 
 
-#sys.path.append('..')  # Import sugargame package from top directory.
+sys.path.append('..')   #Import sugargame package from top directory.
 import sugargame.canvas
 
 import NumRush
@@ -40,8 +40,6 @@ import NumRush
 class NRActivity(sugar3.activity.activity.Activity):
     def __init__(self, handle):
         super(NRActivity, self).__init__(handle)
-
-        #no need of this --self.paused = False
 
         # Create the game instance.
         self.game = NumRush.numrush()
@@ -70,18 +68,6 @@ class NRActivity(sugar3.activity.activity.Activity):
         toolbar_box.toolbar.insert(activity_button, -1)
         activity_button.show()
 
-        # Pause/Play button:
-
-        #stop_play = ToolButton('media-playback-stop')
-        #stop_play.set_tooltip(_("Stop"))
-        #stop_play.set_accelerator(_('<ctrl>space'))
-        #stop_play.connect('clicked', self._stop_play_cb)
-        #stop_play.show()
-
-        #toolbar_box.toolbar.insert(stop_play, -1)
-
-        # Blank space (separator) and Stop button at the end:
-
         separator = Gtk.SeparatorToolItem()
         separator.props.draw = False
         separator.set_expand(True)
@@ -89,22 +75,9 @@ class NRActivity(sugar3.activity.activity.Activity):
         separator.show()
 
         stop_button = StopButton(self)
-        #stop_button.props.accelerator = '<Ctrl><Shift>Q'
         toolbar_box.toolbar.insert(stop_button, -1)
         stop_button.show()
-	'''
-    def _stop_play_cb(self, button):
-        # Pause or unpause the game.
-        self.paused = not self.paused
-        self.game.set_paused(self.paused)
-
-        # Update the button to show the next action.
-        if self.paused:
-            button.set_icon('media-playback-start')
-            button.set_tooltip(_("Start"))
-        else:
-            button.set_icon('media-playback-stop')
-            button.set_tooltip(_("Stop"))
+	
 	
 	
     def read_file(self, file_path):
@@ -112,4 +85,4 @@ class NRActivity(sugar3.activity.activity.Activity):
 
     def write_file(self, file_path):
         self.game.write_file(file_path)
-	'''
+	
