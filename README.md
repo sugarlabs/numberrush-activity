@@ -9,6 +9,4 @@ Four balls each with a different number drop from the top of the display and a m
 The player is awarded 1 point for every correct answer and the game ends the moment a wrong ball is selected. 
 
 The speed of the balls dropping increases as the game continues to make the higher points more and more challenging.
-Screen Shots: 
-![Image of ss1]( https://github.com/Gr33nMayhem/NumberRush/ScreenShots/ss1.png  )
-![Image of ss2]( https://github.com/Gr33nMayhem/NumberRush/ScreenShots/ss2.png  )
+
