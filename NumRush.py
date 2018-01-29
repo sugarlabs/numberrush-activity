@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # Copyright (C) 2016 Azhar Ali here
 #
 # This program is free software; you can redistribute it
@@ -23,8 +24,6 @@ from sugar3 import profile
 import pygame, sys
 from pygame.locals import *
 from random import randint
-import gi
-gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 def randomOperation(maxi):
