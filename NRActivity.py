@@ -43,16 +43,17 @@ class NRActivity(Activity):
     def __init__(self, handle):
         Activity.__init__(self,handle)
 
-        #no need of this --self.paused = False
-
         # Create the game instance.
         self.game = NumRush.numrush()
 
         # Build the activity toolbar.
         self.build_toolbar()
 
-        # Build the Pygame canvas.
-        self._pygamecanvas = sugargame.canvas.PygameCanvas(self, main = self.game.run, modules = [pygame.display])
+        # Build the Pygame canvas and start the game running
+        # (self.game.run is called when the activity constructor
+        # returns).
+        self._pygamecanvas = sugargame.canvas.PygameCanvas(self,
+            main=self.game.run, modules=[pygame.display, pygame.font])
 
         # Note that set_canvas implicitly calls read_file when
         # resuming from the Journal.
