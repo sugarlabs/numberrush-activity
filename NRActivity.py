@@ -39,7 +39,7 @@ import sugargame.canvas
 import NumRush
 
 
-class NRActivity(sugar3.activity.activity.Activity):
+class NRActivity(Activity):
     def __init__(self, handle):
         Activity.__init__(self,handle)
 
