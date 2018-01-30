@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright (C) 2016 Azhar Ali here
+# Copyright (C) 2018 Azhar Ali Khaked here
 #
 # This program is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General
