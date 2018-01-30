@@ -59,10 +59,6 @@ class NRActivity(Activity):
         self.set_canvas(self._pygamecanvas)
         self._pygamecanvas.grab_focus()
 
-        # Start the game running (self.game.run is called when the
-        # activity constructor returns).
-        self._pygamecanvas.run_pygame(self.game.run)
-
     def build_toolbar(self):
         toolbar_box = ToolbarBox()
         self.set_toolbar_box(toolbar_box)
