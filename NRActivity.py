@@ -76,12 +76,11 @@ class NRActivity(Activity):
         separator.show()
 
         stop_button = StopButton(self)
-        #stop_button.props.accelerator = '<Ctrl><Shift>Q'
         toolbar_box.toolbar.insert(stop_button, -1)
         stop_button.show()
-	
+
     def read_file(self, file_path):
-        self.game.read_file(file_path)
+        pass  # self.game.read_file(file_path)
 
     def write_file(self, file_path):
-        self.game.write_file(file_path)
+        pass  # self.game.write_file(file_path)
