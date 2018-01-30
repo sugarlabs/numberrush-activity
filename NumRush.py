@@ -48,31 +48,31 @@ def randomOperation(maxi):
 
 def displayQuery(pick, x, y):
     if (pick == 1):
-        strin = ("Q: %d + %d =") % (x, y)
+        strin = _("Q: %d + %d =") % (x, y)
         texSurfaceObj = fontObj.render(strin, True, WHITE)
         texRectObj = texSurfaceObj.get_rect()
         texRectObj.center = (ResX / 2, 20)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
     elif (pick == 2):
-        strin = ("Q: %d * %d =") % (x, y)
+        strin = _("Q: %d * %d =") % (x, y)
         texSurfaceObj = fontObj.render(strin, True, WHITE)
         texRectObj = texSurfaceObj.get_rect()
         texRectObj.center = (ResX / 2, 20)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
     elif (pick == 3):
-        strin = ("Q: %d / %d =") % (x, y)
+        strin = _("Q: %d / %d =") % (x, y)
         texSurfaceObj = fontObj.render(strin, True, WHITE)
         texRectObj = texSurfaceObj.get_rect()
         texRectObj.center = (ResX / 2, 20)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
     elif (pick == 4):
-        strin = ("Q: %d - %d =") % (x, y)
+        strin = _("Q: %d - %d =") % (x, y)
         texSurfaceObj = fontObj.render(strin, True, WHITE)
         texRectObj = texSurfaceObj.get_rect()
         texRectObj.center = (ResX / 2, 20)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
     elif (pick == 5):
-        strin = ("Q: %d - %d =") % (y, x)
+        strin = _("Q: %d - %d =") % (y, x)
         texSurfaceObj = fontObj.render(strin, True, WHITE)
         texRectObj = texSurfaceObj.get_rect()
         texRectObj.center = (ResX / 2, 20)
