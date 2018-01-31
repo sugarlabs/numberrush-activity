@@ -26,7 +26,7 @@ import sys
 from pygame.locals import *
 from random import randint
 from gi.repository import Gtk
-
+import locale
 
 def randomOperation(maxi):
     x = (randint(0, maxi))
@@ -80,12 +80,12 @@ def displayQuery(pick, x, y):
 
 
 def scoreBoard(score, hscore):
-    texSurfaceObj = fontObj.render(("Score = %d") % (score), True, WHITE)
+    texSurfaceObj = fontObj.render(_("Score = %d") % (score), True, WHITE)
     texRectObj = texSurfaceObj.get_rect()
     texRectObj.center = (80, 20)
     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
 
-    texSurfaceObj = fontObj.render(("High Score = %d") % (hscore), True, WHITE)
+    texSurfaceObj = fontObj.render(_("High Score = %d") % (hscore), True, WHITE)
     texRectObj = texSurfaceObj.get_rect()
     texRectObj.center = (ResX - 120, 20)
     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
@@ -115,7 +115,7 @@ def newGameAnimation():
     pygame.display.update()
     pygame.time.wait(1000)
     DISPLAYSURF.fill(GREY)
-    texSurfaceObj = megaFont.render("GO!", True, BLACK)
+    texSurfaceObj = megaFont.render(_("GO!"), True, BLACK)
     texRectObj = texSurfaceObj.get_rect()
     texRectObj.center = (ResX / 2, ResY / 2)
     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
@@ -127,8 +127,8 @@ def ggAnimation(score, hscore):
     flicker = 0
     while True:
         flicker += 1
-        DISPLAYSURF.fill(GREY)
-        texSurfaceObj = megaFont.render(_("GAME OVER!"), True, RED)
+        DISPLAYSURF.fill(LightColor)
+        texSurfaceObj = megaFont.render(_("GAME OVER!"), True, DarkColor)
         texRectObj = texSurfaceObj.get_rect()
         texRectObj.center = (ResX / 2, ResY / 2)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
@@ -168,8 +168,8 @@ def startAnimation():
     flicker = 0
     while True:
         flicker += 1
-        DISPLAYSURF.fill(WHITE)
-        texSurfaceObj = megaFont.render(_("Number Rush!"), True, BLACK)
+        DISPLAYSURF.fill(LightColor)
+        texSurfaceObj = megaFont.render(("Number Rush!"), True, DarkColor)
         texRectObj = texSurfaceObj.get_rect()
         texRectObj.center = (ResX / 2, ResY / 2)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
@@ -197,6 +197,12 @@ def startAnimation():
         pygame.display.update()
         fpsClock.tick(FPS)
 
+def hex_to_rgb(value):
+    """Return (red, green, blue) for the color given as #rrggbb."""
+    value = value.lstrip('#')
+    lv = len(value)
+    return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
+
 
 def main():
 
@@ -213,7 +219,9 @@ class numrush():
         pass
 
     def run(self):
-        global DISPLAYSURF, WHITE, BLACK, BLUE, GREEN, PURPLE, RED, GREY, fontObj, megaFont, ResX, ResY, FPS, fpsClock
+    	
+        global XO1,XO2,DISPLAYSURF, WHITE, BLACK, DarkColor, LightColor, DarkColor, RED, GREY, fontObj, megaFont, ResX, ResY, FPS, fpsClock
+        XO1,XO2 = profile.get_color().to_string().split(',')
         score = 0
         hscore = 0
         infoObject = pygame.display.Info()
@@ -228,10 +236,10 @@ class numrush():
         WHITE = (255, 255, 255)
         BLACK = (0, 0, 0)
         GREY = (200, 200, 200)
-        PURPLE = (100, 0, 100)
+        DarkColor = hex_to_rgb(XO1)
         RED = (255, 0, 0)
-        GREEN = (200, 200, 0)
-        BLUE = (0, 0, 255)
+        LightColor = hex_to_rgb(XO2)
+        DarkColor = hex_to_rgb(XO1)
 
         LEFT = 'left'
         RIGHT = 'right'
@@ -269,9 +277,9 @@ class numrush():
         newGameAnimation()
         while True:
             DISPLAYSURF.fill(GREY)
-            pygame.draw.rect(DISPLAYSURF, PURPLE, (0, 0, ResX, 50))
-            pygame.draw.rect(DISPLAYSURF, PURPLE, (0, 0, 100, ResY))
-            pygame.draw.rect(DISPLAYSURF, PURPLE, (ResX - 100, 0, ResX, ResY))
+            pygame.draw.rect(DISPLAYSURF, DarkColor, (0, 0, ResX, 50))
+            pygame.draw.rect(DISPLAYSURF, DarkColor, (0, 0, 100, ResY))
+            pygame.draw.rect(DISPLAYSURF, DarkColor, (ResX - 100, 0, ResX, ResY))
 
             displayQuery(selection, x, y)
 
@@ -279,7 +287,7 @@ class numrush():
                 if(i + 1 == rand):
                     texSurfaceObj = fontObj.render(str(n), True, BLACK)
                     texRectObj = texSurfaceObj.get_rect()
-                    pygame.draw.circle(DISPLAYSURF, GREEN,
+                    pygame.draw.circle(DISPLAYSURF, LightColor,
                                        (foodx + (i + 1) * gap, foody), 40, 0)
                     texRectObj.center = (foodx + (i + 1) * gap, foody + 3)
                     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
@@ -288,13 +296,13 @@ class numrush():
                         str(randomOptions[counter]), True, BLACK)
                     counter += 1
                     texRectObj = texSurfaceObj.get_rect()
-                    pygame.draw.circle(DISPLAYSURF, GREEN,
+                    pygame.draw.circle(DISPLAYSURF, LightColor,
                                        (foodx + (i + 1) * gap, foody), 40, 0)
                     texRectObj.center = (foodx + (i + 1) * gap, foody + 3)
                     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
             counter = 0
             pygame.draw.rect(
-                DISPLAYSURF, BLUE, (boxx - 40, boxy, boxx - boxx + 80, boxy))
+                DISPLAYSURF, DarkColor, (boxx - 40, boxy, boxx - boxx + 80, boxy))
 
             scoreBoard(score, hscore)
 
