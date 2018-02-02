@@ -1,5 +1,6 @@
 #!/usr/bin/python
-# Copyright (C) 2018 Azhar Ali Khaked here
+#
+# Copyright (C) 2018 Azhar Ali Khaked <gr33nmayhem@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
