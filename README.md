@@ -1,17 +1,15 @@
 A game of simple math to improve calculation speed of the player.
 
-The can be run independently as a **.py** application or can be run on a **Sugar PC**.
+Can be run independently as a **.py** application or can be run on **Sugar**.
 
-The game requires the player to solve a simple mathematical question,simply by collecting the ball with the correct answer on it.
+The game requires the player to solve a simple mathematical question, by collecting the ball with the correct answer on it.
 
-Four balls each with a different number drop from the top of the display and a mathematical problem will be prompted on the top *(Example : 1+2)*. The way the player scores by collecting the ball with the right answer on it *(here : 3)*, in the box.
+Four balls each with a different number drop from the top of the display and a mathematical problem will be shown on the top *(Example : 10 - 6)*. The player scores by collecting the ball with the right answer on it *(here : 4)*, in the box.
 
-The player is awarded 1 point for every correct answer and the game ends the moment a wrong ball is selected. 
+The player is awarded a point for each correct answer and the game ends when a wrong ball is collected.
 
-The speed of the balls dropping increases as the game continues to make the higher points more and more challenging.
+The balls drop faster as the game continues to make the higher points more challenging.
 
-Screen Shots:
+![ss2](https://github.com/Gr33nMayhem/NumberRush/blob/master/screenshots/ss2.png)
 
-![ss1](https://user-images.githubusercontent.com/30264970/35511717-0a682dda-0523-11e8-8020-08d4614b753f.png)
-
-![ss2](https://user-images.githubusercontent.com/30264970/35511742-224bba0c-0523-11e8-97ad-17ec0587e785.png)
+![ss1](https://github.com/Gr33nMayhem/NumberRush/blob/master/screenshots/ss1.png)
