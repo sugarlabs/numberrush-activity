@@ -1,3 +1,5 @@
+## Numberrush Activity ##
+
 A game of simple math to improve calculation speed of the player.
 
 The can be run independently as a **.py** application or can be run on a **Sugar PC**.
@@ -15,3 +17,16 @@ Screen Shots:
 ![ss1](https://user-images.githubusercontent.com/30264970/35511717-0a682dda-0523-11e8-8020-08d4614b753f.png)
 
 ![ss2](https://user-images.githubusercontent.com/30264970/35511742-224bba0c-0523-11e8-97ad-17ec0587e785.png)
+
+How to use?
+-----------
+
+Numberrush is not part of the Sugar desktop, but can be added. Please refer to;
+
+* [How to Get Sugar on sugarlabs.org](https://sugarlabs.org/),
+* [How to use Sugar](https://help.sugarlabs.org/).
+
+Contributing
+------------
+
+Please consider [contributing](https://github.com/sugarlabs/sugar-docs/blob/master/src/contributing.md) to the project with your ideas and your code.

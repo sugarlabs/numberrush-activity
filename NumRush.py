@@ -156,8 +156,7 @@ def ggAnimation(score, hscore):
             Gtk.main_iteration()
         for event in pygame.event.get():
             if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
+                return
             elif event.type == KEYDOWN:
                 return ()
         pygame.display.update()
@@ -190,8 +189,7 @@ def startAnimation():
             Gtk.main_iteration()
         for event in pygame.event.get():
             if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
+                return
             elif event.type == KEYDOWN:
                 return ()
         pygame.display.update()
@@ -345,8 +343,7 @@ class numrush():
 
             for event in pygame.event.get():
                 if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
+                    return
                 elif event.type == KEYDOWN:
                     if (event.key == K_LEFT or event.key == K_a):
                         if(boxx > gap):
