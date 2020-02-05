@@ -36,7 +36,7 @@ def randomOperation(maxi):
         return 2, x * y, x, y
     elif (pick == 3):
         x = x * y
-        return 3, x / y, x, y
+        return 3, x // y, x, y
     elif (pick == 4):
         if (x > y):
             return 4, x - y, x, y
@@ -49,31 +49,31 @@ def displayQuery(pick, x, y):
         strin = _("Q: %d + %d =") % (x, y)
         texSurfaceObj = fontObj.render(strin, True, WHITE)
         texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX / 2, 20)
+        texRectObj.center = (ResX // 2, 20)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
     elif (pick == 2):
         strin = _("Q: %d * %d =") % (x, y)
         texSurfaceObj = fontObj.render(strin, True, WHITE)
         texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX / 2, 20)
+        texRectObj.center = (ResX // 2, 20)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
     elif (pick == 3):
         strin = _("Q: %d / %d =") % (x, y)
         texSurfaceObj = fontObj.render(strin, True, WHITE)
         texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX / 2, 20)
+        texRectObj.center = (ResX // 2, 20)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
     elif (pick == 4):
         strin = _("Q: %d - %d =") % (x, y)
         texSurfaceObj = fontObj.render(strin, True, WHITE)
         texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX / 2, 20)
+        texRectObj.center = (ResX // 2, 20)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
     elif (pick == 5):
         strin = _("Q: %d - %d =") % (y, x)
         texSurfaceObj = fontObj.render(strin, True, WHITE)
         texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX / 2, 20)
+        texRectObj.center = (ResX // 2, 20)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
 
 
@@ -94,28 +94,28 @@ def newGameAnimation():
     DISPLAYSURF.fill(GREY)
     texSurfaceObj = megaFont.render(("3"), True, BLACK)
     texRectObj = texSurfaceObj.get_rect()
-    texRectObj.center = (ResX / 2, ResY / 2)
+    texRectObj.center = (ResX // 2, ResY // 2)
     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
     pygame.display.update()
     pygame.time.wait(1000)
     DISPLAYSURF.fill(GREY)
     texSurfaceObj = megaFont.render(("2"), True, BLACK)
     texRectObj = texSurfaceObj.get_rect()
-    texRectObj.center = (ResX / 2, ResY / 2)
+    texRectObj.center = (ResX // 2, ResY // 2)
     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
     pygame.display.update()
     pygame.time.wait(1000)
     DISPLAYSURF.fill(GREY)
     texSurfaceObj = megaFont.render(("1"), True, BLACK)
     texRectObj = texSurfaceObj.get_rect()
-    texRectObj.center = (ResX / 2, ResY / 2)
+    texRectObj.center = (ResX // 2, ResY // 2)
     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
     pygame.display.update()
     pygame.time.wait(1000)
     DISPLAYSURF.fill(GREY)
     texSurfaceObj = megaFont.render(_("GO!"), True, BLACK)
     texRectObj = texSurfaceObj.get_rect()
-    texRectObj.center = (ResX / 2, ResY / 2)
+    texRectObj.center = (ResX // 2, ResY // 2)
     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
     pygame.display.update()
     pygame.time.wait(1500)
@@ -128,25 +128,25 @@ def ggAnimation(score, hscore):
         DISPLAYSURF.fill(LightColor)
         texSurfaceObj = megaFont.render(_("GAME OVER!"), True, DarkColor)
         texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX / 2, ResY / 2)
+        texRectObj.center = (ResX // 2, ResY // 2)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
         texSurfaceObj = megaFont.render(
             _("You Scored = %d") %
             (score), True, BLACK)
         texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX / 2, ResY / 2 + 90)
+        texRectObj.center = (ResX // 2, ResY // 2 + 90)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
         texSurfaceObj = fontObj.render(
             _("High Score = %d") %
             (hscore), True, BLACK)
         texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX / 2, ResY / 2 + 180)
+        texRectObj.center = (ResX // 2, ResY // 2 + 180)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
         if(flicker < 15):
             texSurfaceObj = fontObj.render(
                 _("Press any key to continue"), True, BLACK)
             texRectObj = texSurfaceObj.get_rect()
-            texRectObj.center = (ResX / 2, 20)
+            texRectObj.center = (ResX // 2, 20)
             DISPLAYSURF.blit(texSurfaceObj, texRectObj)
         if(flicker == 30):
             flicker = 0
@@ -169,18 +169,18 @@ def startAnimation():
         DISPLAYSURF.fill(LightColor)
         texSurfaceObj = megaFont.render(("Number Rush!"), True, DarkColor)
         texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX / 2, ResY / 2)
+        texRectObj.center = (ResX // 2, ResY // 2)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
         texSurfaceObj = fontObj.render(
             _("Use arrow left-right OR A and D keys to move box"), True, BLACK)
         texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX / 2, ResY / 2 + 180)
+        texRectObj.center = (ResX // 2, ResY // 2 + 180)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
         if(flicker < 15):
             texSurfaceObj = fontObj.render(
                 _("Press any key to continue"), True, BLACK)
             texRectObj = texSurfaceObj.get_rect()
-            texRectObj.center = (ResX / 2, 20)
+            texRectObj.center = (ResX // 2, 20)
             DISPLAYSURF.blit(texSurfaceObj, texRectObj)
         if(flicker == 30):
             flicker = 0
@@ -245,10 +245,10 @@ class numrush():
         foodx = 0
         foody = 100
         food = 4
-        speed = ResY / 320
+        speed = ResY // 320
         speedinc = 1
 
-        gap = (ResX) / (food + 1)
+        gap = (ResX) // (food + 1)
         direction = 'down'
         maxi = 10
         boxx = gap
@@ -320,7 +320,7 @@ class numrush():
                     ggAnimation(score, hscore)
                     newGameAnimation()
                     score = 0
-                    speed = ResY / 320
+                    speed = ResY // 320
                     speedinc = 1
 
                 foody = 100
