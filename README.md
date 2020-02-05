@@ -1,3 +1,5 @@
+## Numberrush Activity ##
+
 A game of simple math to improve calculation speed of the player.
 
 Can be run independently as a **.py** application or can be run on **Sugar**.
@@ -13,3 +15,16 @@ The balls drop faster as the game continues to make the higher points more chall
 ![ss2](https://github.com/Gr33nMayhem/NumberRush/blob/master/screenshots/ss2.png)
 
 ![ss1](https://github.com/Gr33nMayhem/NumberRush/blob/master/screenshots/ss1.png)
+
+How to use?
+-----------
+
+Numberrush is not part of the Sugar desktop, but can be added. Please refer to;
+
+* [How to Get Sugar on sugarlabs.org](https://sugarlabs.org/),
+* [How to use Sugar](https://help.sugarlabs.org/).
+
+Contributing
+------------
+
+Please consider [contributing](https://github.com/sugarlabs/sugar-docs/blob/master/src/contributing.md) to the project with your ideas and your code.
