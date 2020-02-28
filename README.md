@@ -1,4 +1,4 @@
-## Numberrush Activity ##
+## NumberRush Activity ## 
 
 A game of simple math to improve calculation speed of the player.
 
@@ -21,7 +21,7 @@ Screen Shots:
 How to use?
 -----------
 
-Numberrush is not part of the Sugar desktop, but can be added. Please refer to;
+NumberRush is not part of the Sugar desktop, but can be added. Please refer to;
 
 * [How to Get Sugar on sugarlabs.org](https://sugarlabs.org/),
 * [How to use Sugar](https://help.sugarlabs.org/).
