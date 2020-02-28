@@ -81,7 +81,7 @@ class XActivity(Activity):
         stop_button.connect('clicked', self._stop_cb)
 
     def _stop_cb(self, button):
-        self.game.crashed = True
+        self.game.running = False
 
     def read_file(self, file_path):
         pass  # self.game.read_file(file_path)
