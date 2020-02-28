@@ -123,7 +123,7 @@ def newGameAnimation():
 
 def ggAnimation(score, hscore, mainGame):
     flicker = 0
-    while not mainGame.crashed:
+    while mainGame.running:
         flicker += 1
         DISPLAYSURF.fill(LightColor)
         texSurfaceObj = megaFont.render(_("GAME OVER!"), True, DarkColor)
@@ -163,7 +163,7 @@ def ggAnimation(score, hscore, mainGame):
 
 def startAnimation(mainGame):
     flicker = 0
-    while not mainGame.crashed:
+    while mainGame.running:
         flicker += 1
         DISPLAYSURF.fill(LightColor)
         texSurfaceObj = megaFont.render(("Number Rush!"), True, DarkColor)
@@ -267,14 +267,14 @@ class numrush():
         fontObj = pygame.font.Font('freesansbold.ttf', 32)
         megaFont = pygame.font.Font('freesansbold.ttf', 70)
 
-        self.crashed = False
+        self.running = True
 
         counter = 0
         rand = randint(1, 4)
         startAnimation(self)
         newGameAnimation()
 
-        while not self.crashed:
+        while self.running:
             DISPLAYSURF.fill(GREY)
             pygame.draw.rect(DISPLAYSURF, DarkColor, (0, 0, ResX, 50))
             pygame.draw.rect(DISPLAYSURF, DarkColor, (0, 0, 100, ResY))
