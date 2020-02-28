@@ -157,6 +157,10 @@ def ggAnimation(score, hscore, mainGame):
                 return
             elif event.type == KEYDOWN:
                 return ()
+
+        if mainGame.running == False:
+            return
+
         pygame.display.update()
         fpsClock.tick(FPS)
 
@@ -190,6 +194,9 @@ def startAnimation(mainGame):
                 return
             elif event.type == KEYDOWN:
                 return ()
+
+        if mainGame.running == False:
+            return
         pygame.display.update()
         fpsClock.tick(FPS)
 
@@ -353,6 +360,8 @@ class numrush():
                         if(boxx < ResX - gap):
                             boxx += gap
 
+            if self.running == False:
+                return
             pygame.display.update()
             fpsClock.tick(FPS)
 
