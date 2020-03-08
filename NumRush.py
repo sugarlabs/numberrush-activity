@@ -88,38 +88,25 @@ def scoreBoard(score, hscore):
     texRectObj.center = (ResX - 120, 20)
     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
 
-
-def newGameAnimation():
-
+def newGameScreen(text):
     DISPLAYSURF.fill(GREY)
-    texSurfaceObj = megaFont.render(("3"), True, BLACK)
+    texSurfaceObj = megaFont.render((text), True, BLACK)
     texRectObj = texSurfaceObj.get_rect()
     texRectObj.center = (ResX // 2, ResY // 2)
     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
     pygame.display.update()
     pygame.time.wait(1000)
-    DISPLAYSURF.fill(GREY)
-    texSurfaceObj = megaFont.render(("2"), True, BLACK)
-    texRectObj = texSurfaceObj.get_rect()
-    texRectObj.center = (ResX // 2, ResY // 2)
-    DISPLAYSURF.blit(texSurfaceObj, texRectObj)
-    pygame.display.update()
-    pygame.time.wait(1000)
-    DISPLAYSURF.fill(GREY)
-    texSurfaceObj = megaFont.render(("1"), True, BLACK)
-    texRectObj = texSurfaceObj.get_rect()
-    texRectObj.center = (ResX // 2, ResY // 2)
-    DISPLAYSURF.blit(texSurfaceObj, texRectObj)
-    pygame.display.update()
-    pygame.time.wait(1000)
-    DISPLAYSURF.fill(GREY)
-    texSurfaceObj = megaFont.render(_("GO!"), True, BLACK)
-    texRectObj = texSurfaceObj.get_rect()
-    texRectObj.center = (ResX // 2, ResY // 2)
-    DISPLAYSURF.blit(texSurfaceObj, texRectObj)
-    pygame.display.update()
-    pygame.time.wait(1500)
 
+def newGameAnimation(mainGame):
+
+    text = ['3', '2', '1', 'GO!']
+    for i in text:
+        while Gtk.events_pending():
+            Gtk.main_iteration()
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                return
+        newGameScreen(i)
 
 def ggAnimation(score, hscore, mainGame):
     flicker = 0
@@ -279,7 +266,7 @@ class numrush():
         counter = 0
         rand = randint(1, 4)
         startAnimation(self)
-        newGameAnimation()
+        newGameAnimation(self)
 
         while self.running:
             DISPLAYSURF.fill(GREY)
@@ -326,7 +313,7 @@ class numrush():
                     if(score > hscore):
                         hscore = score
                     ggAnimation(score, hscore, self)
-                    newGameAnimation()
+                    newGameAnimation(self)
                     score = 0
                     speed = ResY // 320
                     speedinc = 1
