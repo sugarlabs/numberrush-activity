@@ -89,26 +89,33 @@ def scoreBoard(score, hscore):
     texRectObj = texSurfaceObj.get_rect()
     texRectObj.center = (ResX - 120, 20)
     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
-
-def newGameScreen(text):
-    DISPLAYSURF.fill(GREY)
-    texSurfaceObj = megaFont.render((text), True, BLACK)
-    texRectObj = texSurfaceObj.get_rect()
-    texRectObj.center = (ResX // 2, ResY // 2)
-    DISPLAYSURF.blit(texSurfaceObj, texRectObj)
-    pygame.display.update()
-    pygame.time.wait(1000)
-
+  
 def newGameAnimation(mainGame):
 
     text = ['3', '2', '1', 'GO!']
+
     for i in text:
-        while Gtk.events_pending():
-            Gtk.main_iteration()
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                return
-        newGameScreen(i)
+
+        if mainGame.running == False:
+            return                
+
+        DISPLAYSURF.fill(GREY)
+        texSurfaceObj = megaFont.render((i), True, BLACK)
+        texRectObj = texSurfaceObj.get_rect()
+        texRectObj.center = (ResX // 2, ResY // 2)
+        DISPLAYSURF.blit(texSurfaceObj, texRectObj)
+        pygame.display.update()
+
+        start = pygame.time.get_ticks()
+
+        while mainGame.running:
+            while Gtk.events_pending():
+                Gtk.main_iteration()
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    return
+            if pygame.time.get_ticks() - start > 1000:
+                break               
 
 def ggAnimation(score, hscore, mainGame):
     flicker = 0
