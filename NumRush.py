@@ -104,7 +104,6 @@ def newGameAnimation(mainGame):
         texRectObj = texSurfaceObj.get_rect()
         texRectObj.center = (ResX // 2, ResY // 2)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
-        pygame.display.update()
 
         start = pygame.time.get_ticks()
 
@@ -115,7 +114,10 @@ def newGameAnimation(mainGame):
                 if event.type == QUIT:
                     return
             if pygame.time.get_ticks() - start > 1000:
-                break               
+                break
+
+            pygame.display.update()
+            fpsClock.tick(FPS)
 
 def ggAnimation(score, hscore, mainGame):
     flicker = 0
