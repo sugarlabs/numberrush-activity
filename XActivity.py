@@ -82,4 +82,26 @@ class XActivity(Activity):
         pass  # self.game.read_file(file_path)
 
     def write_file(self, file_path):
-        pass  # self.game.write_file(file_path)
+        hscore, score, game = self.game.save_game()
+        self.metadata['hscore'] = str(hscore)
+        self.metadata['score'] = str(score)
+        # self.metadata['level'] = str(level)
+        self.metadata['game'] = str(game)
+
+    def _restore(self):
+        """ Restore the game state from metadata """
+        # self._restoring = True
+        if 'hscore' in self.metadata:
+            hscore = int(self.metadata['hscore'])
+        else:
+            hscore = 0
+        if 'score' in self.metadata:
+            score = int(self.metadata['score'])
+        else:
+            score = 0
+        if 'game' in self.metadata:
+            game = int(self.metadata['game'])
+        else:
+            game = 0
+        self.game.restore_game(hscore, score, game)
+        # self._restoring = False

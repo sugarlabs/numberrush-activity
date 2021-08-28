@@ -196,6 +196,7 @@ def startAnimation(mainGame):
         pygame.display.update()
         fpsClock.tick(FPS)
 
+
 def hex_to_rgb(value):
     """Return (red, green, blue) for the color given as #rrggbb."""
     value = value.lstrip('#')
@@ -221,8 +222,8 @@ class numrush():
     	
         global XO1,XO2,DISPLAYSURF, WHITE, BLACK, DarkColor, LightColor, DarkColor, RED, GREY, fontObj, megaFont, ResX, ResY, FPS, fpsClock
         XO1,XO2 = profile.get_color().to_string().split(',')
-        score = 0
-        hscore = 0
+        global hscore, score
+        hscore = score = 0
         infoObject = pygame.display.Info()
 
         FPS = 30
@@ -361,6 +362,21 @@ class numrush():
             pygame.display.update()
             fpsClock.tick(FPS)
 
+    def restore_game(self, high_score=0, current_score=0, game=0):
+        ''' Restore a game from the Journal '''
+        # TODO: Save/restore recall list for game 2
+        hscore = high_score
+        score = current_score
+        self.game = game
+        for i, dot in enumerate(dot_list):
+            self._dots[i].type = dot
+            if dot == -1:
+                self._dots[i].hide()
+        self._new_game(restore=True)
+
+    def save_game(self):
+        ''' Return game state for saving to Journal '''
+        return  hscore, score, self.game
 
 if __name__ == '__main__':
     main()
