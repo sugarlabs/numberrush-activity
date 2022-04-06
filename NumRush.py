@@ -18,6 +18,7 @@
 # to the Free Software Foundation, Inc., 51 Franklin
 # St, Fifth Floor, Boston, MA 02110-1301  USA
 
+import os
 from gettext import gettext as _
 from sugar3.graphics.xocolor import XoColor
 from sugar3 import profile
@@ -27,6 +28,7 @@ from pygame.locals import *
 from random import randint
 from gi.repository import Gtk
 import locale
+from sugar3.activity.activity import get_activity_root
 
 def randomOperation(maxi):
     x = (randint(0, maxi))
@@ -225,7 +227,8 @@ class numrush():
         global XO1,XO2,DISPLAYSURF, WHITE, BLACK, DarkColor, LightColor, DarkColor, RED, GREY, fontObj, megaFont, ResX, ResY, FPS, fpsClock
         XO1,XO2 = profile.get_color().to_string().split(',')
         global hscore, score
-        hscore = score = 0
+        hscore = self.load_highscore()
+        score = 0
         infoObject = pygame.display.Info()
 
         FPS = 30
@@ -310,7 +313,7 @@ class numrush():
                 DISPLAYSURF, DarkColor, (boxx - 40, boxy, boxx - boxx + 80, boxy))
 
             scoreBoard(score, hscore)
-
+            self.save_highscore()
             foody += speed
 
             if (score == 10 * speedinc):
@@ -364,21 +367,38 @@ class numrush():
             pygame.display.update()
             fpsClock.tick(FPS)
 
-    def restore_game(self, high_score=0, current_score=0, game=0):
+    def restore_game(self, high_score=0, current_score=0):
         ''' Restore a game from the Journal '''
-        # TODO: Save/restore recall list for game 2
         hscore = high_score
         score = current_score
-        self.game = game
-        for i, dot in enumerate(dot_list):
-            self._dots[i].type = dot
-            if dot == -1:
-                self._dots[i].hide()
-        self._new_game(restore=True)
 
     def save_game(self):
         ''' Return game state for saving to Journal '''
-        return  hscore, score, self.game
+        return  hscore, score
+
+    def read_highscore(self):
+        highscore = [0]
+        file_path = os.path.join(get_activity_root(), 'data', 'highscore')
+        if os.path.exists(file_path):
+            with open(file_path, "r") as fp:
+                highscore = fp.readlines()
+        return int(highscore[0])
+
+    def save_highscore(self):
+        file_path = os.path.join(get_activity_root(), 'data', 'highscore')
+        int_highscore = self.read_highscore()
+        if not int_highscore > score:
+            with open(file_path, "w") as fp:
+                fp.write(str(score))
+
+    def load_highscore(self):
+        highscore = self.read_highscore()
+        try:
+            return highscore
+        except (ValueError, IndexError) as e:
+            logging.exception(e)
+            return 0
+        return 0
 
 if __name__ == '__main__':
     main()
