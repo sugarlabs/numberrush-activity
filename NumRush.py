@@ -374,7 +374,7 @@ class numrush():
 
     def save_game(self):
         ''' Return game state for saving to Journal '''
-        return  hscore, score
+        return hscore, score
 
     def read_highscore(self):
         highscore = [0]
@@ -399,6 +399,7 @@ class numrush():
             logging.exception(e)
             return 0
         return 0
+
 
 if __name__ == '__main__':
     main()
