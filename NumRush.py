@@ -316,8 +316,8 @@ class numrush():
             self.save_highscore()
             foody += speed
 
-            if (score == 10 * speedinc):
-                speed += 2
+            if (score == 5 * speedinc):
+                speed += 1
                 speedinc += 1
 
             if foody > ResY - 1:
