@@ -208,14 +208,14 @@ def main():
 class numrush():
 
     def __init__(self):
-        self.flag = None
+        self.resume_game_flag = None
 
     def run(self):
 
         global XO1, XO2, DISPLAYSURF, WHITE, BLACK, DarkColor, LightColor, DarkColor, RED, GREY, fontObj, megaFont, ResX, ResY, FPS, fpsClock
         XO1, XO2 = profile.get_color().to_string().split(',')
 
-        if not self.flag:
+        if not self.resume_game_flag:
             self.randomOptions = []
             self.n = -1
             self.strin = ''
@@ -262,7 +262,7 @@ class numrush():
         counter = 0
         rand = randint(1, 4)
 
-        if not self.flag:
+        if not self.resume_game_flag:
             selection, self.n, x, y, self.randomOptions = self.answer_options(
                 maxi)
             startAnimation(self)
@@ -275,10 +275,10 @@ class numrush():
             pygame.draw.rect(DISPLAYSURF, DarkColor,
                              (ResX - 100, 0, ResX, ResY))
 
-            if self.flag:
+            if self.resume_game_flag:
                 display(self.strin, ResX // 2, 20)
 
-            if not self.flag:
+            if not self.resume_game_flag:
                 self.strin = selectQuery(selection, x, y)
 
             for i in range(4):
@@ -323,8 +323,8 @@ class numrush():
                     speed = ResY // 320
                     speedinc = 1
 
-                if self.flag:
-                    self.flag = False
+                if self.resume_game_flag:
+                    self.resume_game_flag = False
 
                 foody = 100
                 selection, self.n, x, y, self.randomOptions = self.answer_options(
@@ -375,7 +375,7 @@ class numrush():
         self.restore_cb()
 
     def restore_cb(self):
-        self.flag = True
+        self.resume_game_flag = True
 
     def save_game(self):
         ''' Return game state for saving to Journal '''
