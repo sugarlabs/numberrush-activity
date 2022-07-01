@@ -49,6 +49,9 @@ class XActivity(Activity):
         # Build the activity toolbar.
         self.build_toolbar()
 
+        if 'score' in self.metadata:
+            self._restore()
+
         # Build the Pygame canvas and start the game running
         # (self.game.run is called when the activity constructor
         # returns).
@@ -87,9 +90,12 @@ class XActivity(Activity):
         pass  # self.game.read_file(file_path)
 
     def write_file(self, file_path):
-        hscore, score = self.game.save_game()
+        hscore, score, n, randomOptions, strin = self.game.save_game()
         self.metadata['hscore'] = str(hscore)
         self.metadata['score'] = str(score)
+        self.metadata['n'] = str(n)
+        self.metadata['randomOptions'] = str(randomOptions)
+        self.metadata['strin'] = strin
 
     def _restore(self):
         """ Restore the game state from metadata """
@@ -102,5 +108,18 @@ class XActivity(Activity):
             score = int(self.metadata['score'])
         else:
             score = 0
-        self.game.restore_game(hscore, score)
+        if 'n' in self.metadata:
+            n = int(self.metadata['n'])
+        else:
+            score = 0
+        if 'randomOptions' in self.metadata:
+            randomOptions = self.metadata['randomOptions'][1:-1].split(",")
+            randomOptions = list(map(int, randomOptions))
+        else:
+            randomOptions = [0, 0, 0]
+        if 'strin' in self.metadata:
+            strin = self.metadata['strin']
+        else:
+            strin = '0 - 0'
+        self.game.restore_game(hscore, score, n, randomOptions, strin)
         self._restoring = False

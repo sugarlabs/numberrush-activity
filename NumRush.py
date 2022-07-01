@@ -30,6 +30,7 @@ from gi.repository import Gtk
 import locale
 from sugar3.activity.activity import get_activity_root
 
+
 def randomOperation(maxi):
     x = (randint(0, maxi))
     y = (randint(1, maxi))
@@ -48,50 +49,38 @@ def randomOperation(maxi):
             return 5, y - x, x, y
 
 
-def displayQuery(pick, x, y):
+def display(strin, X, Y):
+    texSurfaceObj = fontObj.render(strin, True, WHITE)
+    texRectObj = texSurfaceObj.get_rect()
+    texRectObj.center = (X, Y)
+    DISPLAYSURF.blit(texSurfaceObj, texRectObj)
+
+
+def selectQuery(pick, x, y):
     if (pick == 1):
         strin = _("Q: %d + %d =") % (x, y)
-        texSurfaceObj = fontObj.render(strin, True, WHITE)
-        texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX // 2, 20)
-        DISPLAYSURF.blit(texSurfaceObj, texRectObj)
+        display(strin, ResX // 2, 20)
+
     elif (pick == 2):
         strin = _("Q: %d * %d =") % (x, y)
-        texSurfaceObj = fontObj.render(strin, True, WHITE)
-        texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX // 2, 20)
-        DISPLAYSURF.blit(texSurfaceObj, texRectObj)
+        display(strin, ResX // 2, 20)
     elif (pick == 3):
         strin = _("Q: %d / %d =") % (x, y)
-        texSurfaceObj = fontObj.render(strin, True, WHITE)
-        texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX // 2, 20)
-        DISPLAYSURF.blit(texSurfaceObj, texRectObj)
+        display(strin, ResX // 2, 20)
     elif (pick == 4):
         strin = _("Q: %d - %d =") % (x, y)
-        texSurfaceObj = fontObj.render(strin, True, WHITE)
-        texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX // 2, 20)
-        DISPLAYSURF.blit(texSurfaceObj, texRectObj)
+        display(strin, ResX // 2, 20)
     elif (pick == 5):
         strin = _("Q: %d - %d =") % (y, x)
-        texSurfaceObj = fontObj.render(strin, True, WHITE)
-        texRectObj = texSurfaceObj.get_rect()
-        texRectObj.center = (ResX // 2, 20)
-        DISPLAYSURF.blit(texSurfaceObj, texRectObj)
+        display(strin, ResX // 2, 20)
+    return strin
 
 
 def scoreBoard(score, hscore):
-    texSurfaceObj = fontObj.render(_("Score = %d") % (score), True, WHITE)
-    texRectObj = texSurfaceObj.get_rect()
-    texRectObj.center = (80, 20)
-    DISPLAYSURF.blit(texSurfaceObj, texRectObj)
+    display(_("Score = %d") % (score), 80, 20)
+    display(_("High Score = %d") % (hscore), ResX - 120, 20)
 
-    texSurfaceObj = fontObj.render(_("High Score = %d") % (hscore), True, WHITE)
-    texRectObj = texSurfaceObj.get_rect()
-    texRectObj.center = (ResX - 120, 20)
-    DISPLAYSURF.blit(texSurfaceObj, texRectObj)
-  
+
 def newGameAnimation(mainGame):
 
     text = ['3', '2', '1', 'GO!']
@@ -99,7 +88,7 @@ def newGameAnimation(mainGame):
     for i in text:
 
         if mainGame.running == False:
-            return                
+            return
 
         DISPLAYSURF.fill(GREY)
         texSurfaceObj = megaFont.render((i), True, BLACK)
@@ -120,6 +109,7 @@ def newGameAnimation(mainGame):
 
             pygame.display.update()
             fpsClock.tick(FPS)
+
 
 def ggAnimation(score, hscore, mainGame):
     flicker = 0
@@ -220,15 +210,20 @@ def main():
 class numrush():
 
     def __init__(self):
-        pass
+        self.flag = None
 
     def run(self):
-    	
-        global XO1,XO2,DISPLAYSURF, WHITE, BLACK, DarkColor, LightColor, DarkColor, RED, GREY, fontObj, megaFont, ResX, ResY, FPS, fpsClock
-        XO1,XO2 = profile.get_color().to_string().split(',')
-        global hscore, score
-        hscore = self.load_highscore()
-        score = 0
+
+        global XO1, XO2, DISPLAYSURF, WHITE, BLACK, DarkColor, LightColor, DarkColor, RED, GREY, fontObj, megaFont, ResX, ResY, FPS, fpsClock
+        XO1, XO2 = profile.get_color().to_string().split(',')
+
+        if not self.flag:
+            self.randomOptions = []
+            self.n = -1
+            self.strin = ''
+            self.hscore = self.load_highscore()
+            self.score = 0
+
         infoObject = pygame.display.Info()
 
         FPS = 30
@@ -261,18 +256,6 @@ class numrush():
         boxx = gap
         boxy = ResY - 40
 
-        selection, n, x, y = randomOperation(maxi)
-        if (n < 3):
-            a = n + (1)
-            b = n + (2)
-            c = n + (3)
-        else:
-            a = n + (1) * (-1)**randint(1, 2)
-            b = n + (2) * (-1)**randint(1, 2)
-            c = n + (3) * (-1)**randint(1, 2)
-
-        randomOptions = [a, b, c]
-
         fontObj = pygame.font.Font('freesansbold.ttf', 32)
         megaFont = pygame.font.Font('freesansbold.ttf', 70)
 
@@ -280,20 +263,29 @@ class numrush():
 
         counter = 0
         rand = randint(1, 4)
-        startAnimation(self)
-        newGameAnimation(self)
+
+        if not self.flag:
+            selection, self.n, x, y, self.randomOptions = self.answer_options(
+                maxi)
+            startAnimation(self)
+            newGameAnimation(self)
 
         while self.running:
             DISPLAYSURF.fill(GREY)
             pygame.draw.rect(DISPLAYSURF, DarkColor, (0, 0, ResX, 50))
             pygame.draw.rect(DISPLAYSURF, DarkColor, (0, 0, 100, ResY))
-            pygame.draw.rect(DISPLAYSURF, DarkColor, (ResX - 100, 0, ResX, ResY))
+            pygame.draw.rect(DISPLAYSURF, DarkColor,
+                             (ResX - 100, 0, ResX, ResY))
 
-            displayQuery(selection, x, y)
+            if self.flag:
+                display(self.strin, ResX // 2, 20)
+
+            if not self.flag:
+                self.strin = selectQuery(selection, x, y)
 
             for i in range(4):
                 if(i + 1 == rand):
-                    texSurfaceObj = fontObj.render(str(n), True, BLACK)
+                    texSurfaceObj = fontObj.render(str(self.n), True, BLACK)
                     texRectObj = texSurfaceObj.get_rect()
                     pygame.draw.circle(DISPLAYSURF, LightColor,
                                        (foodx + (i + 1) * gap, foody), 40, 0)
@@ -301,7 +293,7 @@ class numrush():
                     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
                 else:
                     texSurfaceObj = fontObj.render(
-                        str(randomOptions[counter]), True, BLACK)
+                        str(self.randomOptions[counter]), True, BLACK)
                     counter += 1
                     texRectObj = texSurfaceObj.get_rect()
                     pygame.draw.circle(DISPLAYSURF, LightColor,
@@ -312,40 +304,34 @@ class numrush():
             pygame.draw.rect(
                 DISPLAYSURF, DarkColor, (boxx - 40, boxy, boxx - boxx + 80, boxy))
 
-            scoreBoard(score, hscore)
+            scoreBoard(self.score, self.hscore)
             self.save_highscore()
             foody += speed
 
-            if (score == 5 * speedinc):
+            if (self.score == 5 * speedinc):
                 speed += 1
                 speedinc += 1
 
             if foody > ResY - 1:
                 if(foodx + (rand) * gap == boxx):
-                    score += 1
+                    self.score += 1
 
                 else:
-                    if(score > hscore):
-                        hscore = score
-                    ggAnimation(score, hscore, self)
+                    if(self.score > self.hscore):
+                        self.hscore = self.score
+                    ggAnimation(self.score, self.hscore, self)
                     newGameAnimation(self)
-                    score = 0
+                    self.score = 0
                     speed = ResY // 320
                     speedinc = 1
 
-                foody = 100
-                selection, n, x, y = randomOperation(maxi)
-                rand = randint(1, 4)
-                if (n < 3):
-                    a = n + (1)
-                    b = n + (2)
-                    c = n + (3)
-                else:
-                    a = n + (1) * (-1)**randint(1, 2)
-                    b = n + (2) * (-1)**randint(1, 2)
-                    c = n + (3) * (-1)**randint(1, 2)
+                if self.flag:
+                    self.flag = False
 
-                randomOptions = [a, b, c]
+                foody = 100
+                selection, self.n, x, y, self.randomOptions = self.answer_options(
+                    maxi)
+                self.strin = selectQuery(selection, x, y)
                 counter = 0
 
             while Gtk.events_pending():
@@ -367,14 +353,35 @@ class numrush():
             pygame.display.update()
             fpsClock.tick(FPS)
 
-    def restore_game(self, high_score=0, current_score=0):
+    def answer_options(self, maxi):
+        selection, n, x, y = randomOperation(maxi)
+        if (n < 3):
+            a = n + (1)
+            b = n + (2)
+            c = n + (3)
+        else:
+            a = n + (1) * (-1)**randint(1, 2)
+            b = n + (2) * (-1)**randint(1, 2)
+            c = n + (3) * (-1)**randint(1, 2)
+        randomOptions = [a, b, c]
+        return selection, n, x, y, randomOptions
+
+    def restore_game(self, high_score=0, current_score=0,
+                     answer=0, randOptions=[0, 0, 0], question='0 - 0'):
         ''' Restore a game from the Journal '''
-        hscore = high_score
-        score = current_score
+        self.hscore = high_score
+        self.score = current_score
+        self.n = answer
+        self.randomOptions = randOptions
+        self.strin = question
+        self.restore_cb()
+
+    def restore_cb(self):
+        self.flag = True
 
     def save_game(self):
         ''' Return game state for saving to Journal '''
-        return hscore, score
+        return self.hscore, self.score, self.n, self.randomOptions, self.strin
 
     def read_highscore(self):
         highscore = [0]
@@ -387,9 +394,9 @@ class numrush():
     def save_highscore(self):
         file_path = os.path.join(get_activity_root(), 'data', 'highscore')
         int_highscore = self.read_highscore()
-        if not int_highscore > score:
+        if not int_highscore > self.score:
             with open(file_path, "w") as fp:
-                fp.write(str(score))
+                fp.write(str(self.score))
 
     def load_highscore(self):
         highscore = self.read_highscore()
