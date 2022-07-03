@@ -18,6 +18,7 @@
 # to the Free Software Foundation, Inc., 51 Franklin
 # St, Fifth Floor, Boston, MA 02110-1301  USA
 
+import logging
 import os
 from gettext import gettext as _
 from sugar3.graphics.xocolor import XoColor
@@ -308,7 +309,7 @@ class numrush():
             self.save_highscore()
             foody += speed
 
-            if (self.score == 5 * speedinc):
+            if self.score == 5 * speedinc:
                 speed += 1
                 speedinc += 1
 
@@ -387,8 +388,13 @@ class numrush():
         highscore = [0]
         file_path = os.path.join(get_activity_root(), 'data', 'highscore')
         if os.path.exists(file_path):
-            with open(file_path, "r") as fp:
-                highscore = fp.readlines()
+            try:
+                with open(file_path, "r") as fp:
+                    highscore = fp.readlines()
+                return int(highscore[0])
+            except ValueError or IndexError as e:
+                logging.exception(e)
+                return 0
         return int(highscore[0])
 
     def save_highscore(self):
@@ -400,12 +406,8 @@ class numrush():
 
     def load_highscore(self):
         highscore = self.read_highscore()
-        try:
-            return highscore
-        except (ValueError, IndexError) as e:
-            logging.exception(e)
-            return 0
-        return 0
+        return highscore
+
 
 
 if __name__ == '__main__':
