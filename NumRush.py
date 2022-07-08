@@ -390,7 +390,7 @@ class numrush():
                 with open(file_path, "r") as fp:
                     highscore = fp.readlines()
                 return int(highscore[0])
-            except ValueError or IndexError as e:
+            except (ValueError, IndexError) as e:
                 logging.exception(e)
                 return 0
         return int(highscore[0])
