@@ -78,8 +78,8 @@ def selectQuery(pick, x, y):
 
 
 def scoreBoard(score, hscore):
-    display(_("Score = %d") % (score), 80, 20)
-    display(_("High Score = %d") % (hscore), ResX - 120, 20)
+    display(_("Score = %d") % (score), 110, 20)
+    display(_("High Score = %d") % (hscore), ResX - 150, 20)
 
 
 def newGameAnimation(mainGame):
@@ -332,6 +332,7 @@ class numrush():
                 foody = 100
                 selection, self.n, x, y, self.randomOptions = self.answer_options(
                     maxi)
+                rand = randint(1, 4)
                 self.strin = selectQuery(selection, x, y)
                 counter = 0
 
