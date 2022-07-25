@@ -347,7 +347,7 @@ class numrush():
                         if(boxx > gap):
                             boxx -= gap
                     elif (event.key == K_RIGHT or event.key == K_d):
-                        if(boxx < ResX - gap):
+                        if(boxx < (ResX - (2 * gap) + 20)):
                             boxx += gap
 
             if self.running == False:
