@@ -247,7 +247,7 @@ class numrush():
         foody = 100
         food = 4
         speed = ResY // 320
-        speedinc = 1
+        acc = 0.01
 
         gap = (ResX) // (food + 1)
         direction = 'down'
@@ -306,14 +306,12 @@ class numrush():
             scoreBoard(self.score, self.hscore)
             self.save_highscore()
             foody += speed
-
-            if self.score == 5 * speedinc:
-                speed += 1
-                speedinc += 1
+            speed += acc
 
             if foody > ResY - 1:
                 if(foodx + (rand) * gap == boxx):
                     self.score += 1
+                    speed = ResY // 320 + self.score // 4
 
                 else:
                     if(self.score > self.hscore):
@@ -322,7 +320,6 @@ class numrush():
                     newGameAnimation(self)
                     self.score = 0
                     speed = ResY // 320
-                    speedinc = 1
 
                 if self.resume_game_flag:
                     self.resume_game_flag = False
