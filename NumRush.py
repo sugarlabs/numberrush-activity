@@ -253,10 +253,16 @@ class numrush():
         direction = 'down'
         maxi = 10
         boxx = gap
-        boxy = ResY - 40
+        boxy = ResY - 30
 
         fontObj = pygame.font.Font('freesansbold.ttf', 32)
         megaFont = pygame.font.Font('freesansbold.ttf', 70)
+        background = pygame.image.load('textures/background.png')
+        background = pygame.transform.scale(background, (ResX, ResY))
+        circ = pygame.image.load('textures/num.png')
+        circ = pygame.transform.scale(circ, (80, 80))
+        paddle = pygame.image.load('textures/paddle.png')
+        paddle = pygame.transform.scale(paddle, (200, ResY - boxy))
 
         self.running = True
 
@@ -270,11 +276,7 @@ class numrush():
             newGameAnimation(self)
 
         while self.running:
-            DISPLAYSURF.fill(GREY)
-            pygame.draw.rect(DISPLAYSURF, DarkColor, (0, 0, ResX, 50))
-            pygame.draw.rect(DISPLAYSURF, DarkColor, (0, 0, 100, ResY))
-            pygame.draw.rect(DISPLAYSURF, DarkColor,
-                             (ResX - 100, 0, ResX, ResY))
+            DISPLAYSURF.blit(background, (0, 0))
 
             if self.resume_game_flag:
                 display(self.strin, ResX // 2, 20)
@@ -284,24 +286,23 @@ class numrush():
 
             for i in range(4):
                 if(i + 1 == rand):
-                    texSurfaceObj = fontObj.render(str(self.n), True, BLACK)
+                    texSurfaceObj = fontObj.render(str(self.n), True, (210, 220, 255))
                     texRectObj = texSurfaceObj.get_rect()
-                    pygame.draw.circle(DISPLAYSURF, LightColor,
-                                       (foodx + (i + 1) * gap, foody), 40, 0)
+
+                    DISPLAYSURF.blit(circ, (foodx + (i + 1) * gap - 40, foody - 40))
                     texRectObj.center = (foodx + (i + 1) * gap, foody + 3)
                     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
                 else:
                     texSurfaceObj = fontObj.render(
-                        str(self.randomOptions[counter]), True, BLACK)
+                        str(self.randomOptions[counter]), True, (210, 210, 255))
                     counter += 1
+                    DISPLAYSURF.blit(circ, (foodx + (i + 1) * gap - 40, foody - 40))
                     texRectObj = texSurfaceObj.get_rect()
-                    pygame.draw.circle(DISPLAYSURF, LightColor,
-                                       (foodx + (i + 1) * gap, foody), 40, 0)
                     texRectObj.center = (foodx + (i + 1) * gap, foody + 3)
                     DISPLAYSURF.blit(texSurfaceObj, texRectObj)
             counter = 0
-            pygame.draw.rect(
-                DISPLAYSURF, DarkColor, (boxx - 40, boxy, boxx - boxx + 80, boxy))
+
+            DISPLAYSURF.blit(paddle, (boxx - 100, boxy))
 
             scoreBoard(self.score, self.hscore)
             self.save_highscore()
