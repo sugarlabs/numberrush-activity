@@ -12,9 +12,9 @@ The player is awarded a point for each correct answer and the game ends when a w
 
 The balls drop faster as the game continues to make the higher points more challenging.
 
-![ss2](https://github.com/Gr33nMayhem/NumberRush/blob/master/screenshots/ss2.png)
+![ss2](screenshots/ss2.png)
 
-![ss1](https://github.com/Gr33nMayhem/NumberRush/blob/master/screenshots/ss1.png)
+![ss1](screenshots/ss1.png)
 
 How to use?
 -----------
