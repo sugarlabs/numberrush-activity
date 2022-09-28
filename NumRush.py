@@ -19,6 +19,7 @@
 import logging
 import os
 from gettext import gettext as _
+from time import sleep
 from sugar3.graphics.xocolor import XoColor
 from sugar3 import profile
 import pygame
@@ -58,20 +59,14 @@ def display(strin, X, Y):
 def selectQuery(pick, x, y):
     if (pick == 1):
         strin = _("Q: %d + %d =") % (x, y)
-        display(strin, ResX // 2, 20)
-
     elif (pick == 2):
         strin = _("Q: %d * %d =") % (x, y)
-        display(strin, ResX // 2, 20)
     elif (pick == 3):
         strin = _("Q: %d / %d =") % (x, y)
-        display(strin, ResX // 2, 20)
     elif (pick == 4):
         strin = _("Q: %d - %d =") % (x, y)
-        display(strin, ResX // 2, 20)
     elif (pick == 5):
         strin = _("Q: %d - %d =") % (y, x)
-        display(strin, ResX // 2, 20)
     return strin
 
 
@@ -254,6 +249,8 @@ class numrush():
         maxi = 10
         boxx = gap
         boxy = ResY - 30
+        score_flag = False
+        option_display_flag = False
 
         fontObj = pygame.font.Font('freesansbold.ttf', 32)
         megaFont = pygame.font.Font('freesansbold.ttf', 70)
@@ -283,23 +280,28 @@ class numrush():
 
             if not self.resume_game_flag:
                 self.strin = selectQuery(selection, x, y)
+                display(self.strin, ResX // 2, 20)
 
             for i in range(4):
-                if(i + 1 == rand):
-                    texSurfaceObj = fontObj.render(str(self.n), True, (210, 220, 255))
-                    texRectObj = texSurfaceObj.get_rect()
-
-                    DISPLAYSURF.blit(circ, (foodx + (i + 1) * gap - 40, foody - 40))
-                    texRectObj.center = (foodx + (i + 1) * gap, foody + 3)
-                    DISPLAYSURF.blit(texSurfaceObj, texRectObj)
-                else:
-                    texSurfaceObj = fontObj.render(
-                        str(self.randomOptions[counter]), True, (210, 210, 255))
-                    counter += 1
-                    DISPLAYSURF.blit(circ, (foodx + (i + 1) * gap - 40, foody - 40))
-                    texRectObj = texSurfaceObj.get_rect()
-                    texRectObj.center = (foodx + (i + 1) * gap, foody + 3)
-                    DISPLAYSURF.blit(texSurfaceObj, texRectObj)
+                if foody < boxy:
+                    option_display_flag = True
+                    if(i + 1 == rand):
+                        texSurfaceObj = fontObj.render(
+                            str(self.n), True, (210, 220, 255))
+                        texRectObj = texSurfaceObj.get_rect()
+                        DISPLAYSURF.blit(
+                            circ, (foodx + (i + 1) * gap - 40, foody - 40))
+                        texRectObj.center = (foodx + (i + 1) * gap, foody + 3)
+                        DISPLAYSURF.blit(texSurfaceObj, texRectObj)
+                    else:
+                        texSurfaceObj = fontObj.render(
+                            str(self.randomOptions[counter]), True, (210, 210, 255))
+                        counter += 1
+                        DISPLAYSURF.blit(
+                            circ, (foodx + (i + 1) * gap - 40, foody - 40))
+                        texRectObj = texSurfaceObj.get_rect()
+                        texRectObj.center = (foodx + (i + 1) * gap, foody + 3)
+                        DISPLAYSURF.blit(texSurfaceObj, texRectObj)
             counter = 0
 
             DISPLAYSURF.blit(paddle, (boxx - 100, boxy))
@@ -310,9 +312,13 @@ class numrush():
             speed += acc
 
             if foody > ResY - 1:
+                display(self.strin, ResX // 2, 20)
+
                 if(foodx + (rand) * gap == boxx):
                     self.score += 1
                     speed = ResY // 320 + self.score // 4
+                    score_flag = True
+                    self.add_point_animation(boxx, boxy)
 
                 else:
                     if(self.score > self.hscore):
@@ -326,11 +332,13 @@ class numrush():
                     self.resume_game_flag = False
 
                 foody = 100
-                selection, self.n, x, y, self.randomOptions = self.answer_options(
-                    maxi)
-                rand = randint(1, 4)
-                self.strin = selectQuery(selection, x, y)
-                counter = 0
+
+                if option_display_flag:
+                    selection, self.n, x, y, self.randomOptions = self.answer_options(
+                        maxi)
+                    rand = randint(1, 4)
+                    self.strin = selectQuery(selection, x, y)
+                    counter = 0
 
             while Gtk.events_pending():
                 Gtk.main_iteration()
@@ -350,6 +358,14 @@ class numrush():
                 return
             pygame.display.update()
             fpsClock.tick(FPS)
+
+            if score_flag:
+                sleep(0.5)
+                score_flag = False
+
+    def add_point_animation(self, boxx, boxy):
+        add_point = pygame.image.load('textures/plus-one.png')
+        DISPLAYSURF.blit(add_point, (boxx, boxy - 40))
 
     def answer_options(self, maxi):
         selection, n, x, y = randomOperation(maxi)
