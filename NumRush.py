@@ -287,7 +287,7 @@ class numrush():
                     option_display_flag = True
                     if(i + 1 == rand):
                         texSurfaceObj = fontObj.render(
-                            str(self.n), True, (210, 220, 255))
+                            str(self.n), True, (3, 27, 54))
                         texRectObj = texSurfaceObj.get_rect()
                         DISPLAYSURF.blit(
                             circ, (foodx + (i + 1) * gap - 40, foody - 40))
@@ -295,7 +295,7 @@ class numrush():
                         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
                     else:
                         texSurfaceObj = fontObj.render(
-                            str(self.randomOptions[counter]), True, (210, 210, 255))
+                            str(self.randomOptions[counter]), True, (3, 27, 54))
                         counter += 1
                         DISPLAYSURF.blit(
                             circ, (foodx + (i + 1) * gap - 40, foody - 40))
