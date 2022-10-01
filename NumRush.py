@@ -109,7 +109,9 @@ def ggAnimation(score, hscore, mainGame):
     flicker = 0
     while mainGame.running:
         flicker += 1
-        DISPLAYSURF.fill(LightColor)
+        gameover_bg = pygame.image.load('textures/background2.png')
+        gameover_bg = pygame.transform.scale(gameover_bg, (ResX, ResY))
+        DISPLAYSURF.blit(gameover_bg, (0, 0))
         texSurfaceObj = megaFont.render(_("GAME OVER!"), True, DarkColor)
         texRectObj = texSurfaceObj.get_rect()
         texRectObj.center = (ResX // 2, ResY // 2)
@@ -130,7 +132,7 @@ def ggAnimation(score, hscore, mainGame):
             texSurfaceObj = fontObj.render(
                 _("Press any key to continue"), True, BLACK)
             texRectObj = texSurfaceObj.get_rect()
-            texRectObj.center = (ResX // 2, 20)
+            texRectObj.center = (ResX // 2, 200)
             DISPLAYSURF.blit(texSurfaceObj, texRectObj)
         if(flicker == 30):
             flicker = 0
@@ -153,7 +155,9 @@ def startAnimation(mainGame):
     flicker = 0
     while mainGame.running:
         flicker += 1
-        DISPLAYSURF.fill(LightColor)
+        background = pygame.image.load('textures/background2.png')
+        background = pygame.transform.scale(background, (ResX, ResY))
+        DISPLAYSURF.blit(background, (0, 0))
         texSurfaceObj = megaFont.render(("Number Rush!"), True, DarkColor)
         texRectObj = texSurfaceObj.get_rect()
         texRectObj.center = (ResX // 2, ResY // 2)
@@ -167,7 +171,7 @@ def startAnimation(mainGame):
             texSurfaceObj = fontObj.render(
                 _("Press any key to continue"), True, BLACK)
             texRectObj = texSurfaceObj.get_rect()
-            texRectObj.center = (ResX // 2, 20)
+            texRectObj.center = (ResX // 2, 200)
             DISPLAYSURF.blit(texSurfaceObj, texRectObj)
         if(flicker == 30):
             flicker = 0
