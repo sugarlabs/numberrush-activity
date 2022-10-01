@@ -263,8 +263,7 @@ class numrush():
         circ = pygame.image.load('textures/num.png')
         circ = pygame.transform.scale(circ, (80, 80))
         paddle = pygame.image.load('textures/paddle.png')
-        paddle = pygame.transform.scale(paddle, (200, ResY - boxy))
-
+        paddle = pygame.transform.scale(paddle, (200, ResY - (boxy-50)))
         self.running = True
 
         counter = 0
@@ -308,7 +307,7 @@ class numrush():
                         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
             counter = 0
 
-            DISPLAYSURF.blit(paddle, (boxx - 100, boxy))
+            DISPLAYSURF.blit(paddle, (boxx - 100, boxy - 50))
 
             scoreBoard(self.score, self.hscore)
             self.save_highscore()
@@ -369,7 +368,7 @@ class numrush():
 
     def add_point_animation(self, boxx, boxy):
         add_point = pygame.image.load('textures/plus-one.png')
-        DISPLAYSURF.blit(add_point, (boxx, boxy - 40))
+        DISPLAYSURF.blit(add_point, (boxx - 20, boxy - 100))
 
     def answer_options(self, maxi):
         selection, n, x, y = randomOperation(maxi)
