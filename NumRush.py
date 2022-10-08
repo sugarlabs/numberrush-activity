@@ -19,7 +19,6 @@
 import logging
 import os
 from gettext import gettext as _
-from time import sleep
 from sugar3.graphics.xocolor import XoColor
 from sugar3 import profile
 import pygame
@@ -363,7 +362,7 @@ class numrush():
             fpsClock.tick(FPS)
 
             if score_flag:
-                sleep(0.5)
+                pygame.time.delay(500)
                 score_flag = False
 
     def add_point_animation(self, boxx, boxy):
