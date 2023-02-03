@@ -104,7 +104,7 @@ def newGameAnimation(mainGame):
             fpsClock.tick(FPS)
 
 
-def ggAnimation(score, hscore, mainGame):
+def ggAnimation(strin, score, hscore, mainGame):
     flicker = 0
     while mainGame.running:
         flicker += 1
@@ -114,6 +114,12 @@ def ggAnimation(score, hscore, mainGame):
         texSurfaceObj = megaFont.render(_("GAME OVER!"), True, DarkColor)
         texRectObj = texSurfaceObj.get_rect()
         texRectObj.center = (ResX // 2, ResY // 2)
+        DISPLAYSURF.blit(texSurfaceObj, texRectObj)
+        texSurfaceObj = fontObj.render(
+            _("The correct answer was %s %d" ) % 
+            (strin[2:],eval(strin[2:-1])), True, RED)
+        texRectObj = texSurfaceObj.get_rect()
+        texRectObj.center = (ResX // 2, ResY // 2 - 100)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
         texSurfaceObj = megaFont.render(
             _("You Scored = %d") %
@@ -325,7 +331,7 @@ class numrush():
                 else:
                     if(self.score > self.hscore):
                         self.hscore = self.score
-                    ggAnimation(self.score, self.hscore, self)
+                    ggAnimation(self.strin, self.score, self.hscore, self)
                     newGameAnimation(self)
                     self.score = 0
                     speed = ResY // 320
