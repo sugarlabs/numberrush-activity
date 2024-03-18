@@ -116,7 +116,7 @@ def ggAnimation(strin, n, score, hscore, mainGame):
         texRectObj.center = (ResX // 2, ResY // 2)
         DISPLAYSURF.blit(texSurfaceObj, texRectObj)
         texSurfaceObj = fontObj.render(
-            _("The correct answer was %s %d" ) % 
+            _("The correct answer was %s %d" ) %
             (strin[2:],n), True, RED)
         texRectObj = texSurfaceObj.get_rect()
         texRectObj.center = (ResX // 2, ResY // 2 - 100)
@@ -214,6 +214,7 @@ class numrush():
 
     def __init__(self):
         self.resume_game_flag = None
+        self.consecutive_correct_answers = 0
 
     def run(self):
 
@@ -324,7 +325,12 @@ class numrush():
 
                 if(foodx + (rand) * gap == boxx):
                     self.score += 1
-                    speed = ResY // 320 + self.score // 4
+                    self.consecutive_correct_answers += 1
+                    if self.consecutive_correct_answers == 5:
+                        self.show_consecutive_correct_prompt()
+                        self.score += 5
+                        self.consecutive_correct_answers = 0
+                    speed = ResY // 320 + self.score // 7 #decreased Speed
                     score_flag = True
                     self.add_point_animation(boxx, boxy)
 
@@ -334,6 +340,7 @@ class numrush():
                     ggAnimation(self.strin, self.n, self.score, self.hscore, self)
                     newGameAnimation(self)
                     self.score = 0
+                    self.consecutive_correct_answers = 0
                     speed = ResY // 320
 
                 if self.resume_game_flag:
@@ -429,6 +436,12 @@ class numrush():
         highscore = self.read_highscore()
         return highscore
 
+    def show_consecutive_correct_prompt(self):
+            # Display the prompt for 5 consecutive correct answers
+            consecutive_prompt_text = "Congrats! You've earned 5 bonus points for 5 consecutive correct answers!"
+            display(consecutive_prompt_text, ResX // 2, ResY // 2)
+            pygame.display.update()
+            pygame.time.delay(1000)  # Display the prompt for 1 seconds
 
 
 if __name__ == '__main__':
