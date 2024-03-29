@@ -59,9 +59,9 @@ def selectQuery(pick, x, y):
     if (pick == 1):
         strin = _("Q: %d + %d =") % (x, y)
     elif (pick == 2):
-        strin = _("Q: %d * %d =") % (x, y)
+        strin = _("Q: %d × %d =") % (x, y)
     elif (pick == 3):
-        strin = _("Q: %d / %d =") % (x, y)
+        strin = _("Q: %d ÷ %d =") % (x, y)
     elif (pick == 4):
         strin = _("Q: %d - %d =") % (x, y)
     elif (pick == 5):
